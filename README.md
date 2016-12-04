@@ -32,12 +32,11 @@ __GitHub Trends__ was created by mining open source code for insights on open so
 + Recommending new packages that are relevant to packages users may already be using
 
 ## 2 The Database
-The data I used came from two tables that totaled 2TB in size on BigQuery. The `contents` table included code at the file level, and the `commits` table included timestamps at the commit level. For the scope of this 2-week project, I limited my data to the Python language which is 7% of repos, and used an extract available for [Python contents](https://bigquery.cloud.google.com/table/fh-bigquery:github_extracts.contents_py) that made the joins less massive.
+The data I used came from two tables that totaled 2TB in size on BigQuery. The `contents` table included code at the file level, and the `commits` table included timestamps at the commit level. For the scope of this 2-week project, I limited my data to the __Python language__ which is 7% of repos, and used an extract available for [Python contents](https://bigquery.cloud.google.com/table/fh-bigquery:github_extracts.contents_py) that made the joins less massive.
 
 <p align="center">
 <img src="img/percent_repos.png" width="350" align="middle"/>
-<h4 align="center">Figure 2. Languages used in GitHub repos.</h4>
-<center>[<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</center>
+<h4 align="center">Figure 2. Languages used in GitHub repos. [<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</h4>
 </p>
 
 When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested.
