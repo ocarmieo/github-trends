@@ -171,27 +171,11 @@ if __name__ == '__main__':
     #     f.write('{}\n'.format(line))
     # f.close()
 
-    # G = add_galvanize_to_graph(G):
+    G = add_galvanize_to_graph(G):
 
-    # nx.write_gml(G, 'data/python_graph.gml')
+    nx.write_gml(G, 'data/python_graph.gml')
 
-    # ig = igraph.read('data/python_graph.gml')
-    # ig.write_pickle('data/graph.pkl')
+    ig = igraph.read('data/python_graph.gml')
+    ig.write_pickle('data/graph.pkl')
 
-    # recommendations = recommend_packages(ig, 'textblob', neighbor_order=1, weight_method='jaccard')
-
-
-
-    # for edge in graph.es:
-    #     source_vertex_id = edge.source
-    #     target_vertex_id = edge.target
-    #     source_vertex = graph.vs[source_vertex_id]
-    #     target_vertex = graph.vs[target_vertex_id]
-    #     # using get_eid() you can do the opposite:
-    #     same_edge_id = graph.get_eid(source_vertex_id, target_vertex_id)
-    #     same_edge = graph.es[same_edge_id]
-    #     # by .index you get the id from the Vertex or Edge object:
-    #     source_vertex.index == source_vertex_id
-    #     # True
-    #     edge.index == same_edge_id
-    #     # True
+    recommendations = recommend_packages(ig, 'textblob', neighbor_order=1, weight_method='jaccard')

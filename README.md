@@ -44,7 +44,7 @@ When querying the data, I wanted to take advantage of Google's compute engine an
 
 <p align="center">
 <img src="img/regex.png" width="500" align="middle"/>
-<h4 align="center">Figure 3. Package name extraction from code.</h4>
+<h4 align="center">Figure 3. Package name extraction from Python code.</h4>
 </p>
 
 ###2.1 Time Series Data
