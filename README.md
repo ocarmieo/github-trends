@@ -1,8 +1,8 @@
-<img src="img/cover.png" align="middle"/>
 <p align="center"><i>Galvanize data science capstone project built in <b>2 weeks</b></i></p>
+<img src="img/cover.png" align="middle"/>
 
 <img src="img/graph.gif" align="middle"/>
-<h4 align="center">Figure 1. The Python package universe, compared to those taught in Galvanize.</h4>
+<h4 align="center">Figure 1. The Python package universe, compared to those taught at Galvanize.</h4>
 
 ## Table of Contents
 1. [Motivation](#1-motivation)
@@ -37,10 +37,10 @@ The data I used came from two tables that totaled 2TB in size on BigQuery. The `
 <p align="center">
 <img src="img/percent_repos.png" width="350" align="middle"/>
 <h4 align="center">Figure 2. Languages used in GitHub repos.</h4>
-[<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]
+<center>[<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</center>
 </p>
 
-When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs and each of their package imports nested.
+When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested.
 
 <p align="center">
 <img src="img/regex.png" width="500" align="middle"/>
@@ -55,7 +55,7 @@ To prepare the data for easy querying on the web app, I stored the count of pack
 To get the edge (package connections) pairs, I need to count each combination of packages for each file. Doing this in SQL would involve self joins and a lot of computation, so I decided to export the data and use MapReduce to parallelize the process. This could be done for __4 million files in a couple of minutes__ using Amazon EMR (Elastic MapReduce) to split the work across multiple machines.
 
 <p align="center">
-<img src="img/mapreduce.png" width="800" align="middle"/>
+<img src="img/mapreduce.png" width="900" align="middle"/>
 <h4 align="center"> Figure 4. MapReduce to parallelize computation for edge counts.</h4>
 </p>
 
@@ -67,12 +67,16 @@ To get the edge (package connections) pairs, I need to count each combination of
 
 For the time series portion of the web app, users can input a list of packages and the app will return an interactive plot created using mpld3. __Similar to Google Trends, the highest value on the plot is set to 100__ and the other values are scaled proportionally for comparison on a relative basis.
 
+This plot was made using [`mpld3`](https://mpld3.github.io/), a Python toolkit that enables you to write code for `matplotlib`, and then export the figure to HTML code that renders in __D3__, a JavaScript library for interactive data visualizations.
+
 ## 4 Network Analysis and Recommender
 
-The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the graph data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I then used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to build the __recommender__. The goal of the project was __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. There are a few metrics that help to achieve this from a visualization standpoint.
+The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the graph data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I then used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to build the __recommender__.
+
+The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. There are a few metrics that help to achieve this from a visualization standpoint.
 
 <p align="center">
-<img src="img/compare_graphs.png" width="800" align="middle"/>
+<img src="img/compare_graphs.png" width="900" align="middle"/>
 <h4 align="center">Figure 6. Influence of edge weights and centrality metric on network visualization.</h4>
 </p>
 
