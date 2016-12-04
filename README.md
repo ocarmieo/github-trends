@@ -15,7 +15,7 @@
 	* [4.2 Node Importance](#42-node-importance)
 	* [4.3 Node Similarity](#43-node-similarity)
 	* [4.4 Communities](#44-communities)
-5. [Text Analysis and Prediction](#5-text-analysis-and-prediction) 
+5. [Text Mining and Prediction](#5-text-mining-and-prediction) 
 6. [The Web App](#6-the-web-app)
 7. [About the Author](#7-about-the-author)
 8. [References](#8-references)
@@ -70,7 +70,7 @@ This plot was made using [`mpld3`](https://mpld3.github.io/), a Python toolkit t
 
 ## 4 Network Analysis and Recommender
 
-The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the graph data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I then used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to build the __recommender__.
+The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__.
 
 The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. There are a few metrics that help to achieve this from a visualization standpoint.
 
@@ -86,7 +86,7 @@ Edge weights represent the strength of a relationship between two packages. Howe
 <img src="img/pmi.png" width="250" align="middle"/>
 </p>
 
-To visualize the graph, I used a __force-directed layout__ in Gephi called ForceAtlas 2, which took into account the edge weights in the calculation of attraction and repulsion forces. Packages with a strong relationship attract, while packages with weak or no relationship repel. Gephi has [different layouts](https://gephi.org/tutorials/gephi-tutorial-layouts.pdf) depending on what features you want to highlight.
+To visualize the network, I used a __force-directed layout__ in Gephi called ForceAtlas 2, which took into account the edge weights in the calculation of attraction and repulsion forces. Packages with a strong relationship attract, while packages with weak or no relationship repel. Gephi has [different layouts](https://gephi.org/tutorials/gephi-tutorial-layouts.pdf) depending on what features you want to highlight.
 
 <p align="center">
 <img src="img/graph_layouts.png" width="500" align="middle"/>
@@ -101,7 +101,7 @@ To visualize the graph, I used a __force-directed layout__ in Gephi called Force
 
 A few different metrics can be used to determine node importance: degree centrality, betweenness centrality, and eigenvector centrality. They are proportional to the following (prior to normalization):
 + __Degree__: number of neighbors a node has
-+ __Betweenness__: number of shortest paths throughout the graph that pass through a node
++ __Betweenness__: number of shortest paths throughout the network that pass through a node
 + __Eigenvector__: sum of a node's neighbors' centralities
 
 Degree centrality made most packages disappear with the exception of the big ones that are more generally used (`os`, `sys`). Betweenness centrality had a similar result, likely influenced by the edge weights. __Eigenvector centrality__ looked the best visually and made the most sense in terms of the objectives of this project: __to recommend packages that may not be the most widely used, but are the most relevant__. The assumption is that a node's importance depends more on the quality of its connections rather than the quantity. Google's PageRank algorithm used to order search engine results is a variant of eigenvector centrality.
@@ -118,7 +118,7 @@ There are a few other statistics for calculating common neighbor similarity. Cos
 ###4.4 Communities
 __Modularity__ is a measure of how densely connected a community is based on the number of edges that are _within_ a community compared to the _expected_ number that would exist at random, holding the number of degrees constant. A community should have denser connections within itself and sparser connections to other communities. Gephi allows you to color nodes based on "Modularity Class." You can tweak the community detection algorithm resolution to show more of fewer communities.
 
-## 5 Text Analysis and Prediction
+## 5 Text Mining and Prediction
 Analysis of package description text coming soon!
 
 ## 6 The Web App
@@ -127,7 +127,7 @@ The web app consists of two components:
 <p align="center">
 <img src="img/time.gif" width="800" align="middle"/>
 </p>
-+ __Network-based recommender of both similar and relevant packages__
++ __Network-based recommender of similar or relevant packages__ - allows users to traverse through the network based on similarity or relevance
 <p align="center">
 <img src="img/rec.gif" width="800" align="middle"/>
 </p>
