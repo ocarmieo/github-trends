@@ -81,7 +81,7 @@ The goal of the project is __to expose packages that may not be the most widely 
 </p>
 
 ###4.1 Edge Weights
-Edge weights represent the strength of a relationship between two packages. However, if I simply determined the strength of a relationship based on edge counts (number of times they co-occur), smaller packages would get overshadowed by large packages even if they had a stronger relationship. Instead, I decided to use __pointwise mutual information (PMI)__ statistic, which not only takes into the joint probability of 2 packages occuring together, but also their individual occurence probabilities. This value can be normalized between [-1,+1].
+Edge weights represent the strength of a relationship between two packages. However, if I simply determined the strength of a relationship based on edge counts (number of times they co-occur), smaller packages would get overshadowed by large packages even if they had a stronger relationship. Instead, I decided to use __pointwise mutual information (PMI)__, which not only takes into the joint probability of 2 packages occuring, but also their individual probabilities. This value can be normalized between [-1,+1].
 
 <p align="center">
 <img src="img/pmi.png" width="250" align="middle"/>
