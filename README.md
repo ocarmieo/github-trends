@@ -1,8 +1,8 @@
 <img src="img/cover.png" align="middle"/>
-
-<p align="center"><i>Galvanize capstone project built in <b>2 weeks</b></i></p>
+<p align="center"><i>Galvanize data science capstone project built in <b>2 weeks</b></i></p>
 
 <img src="img/graph.gif" align="middle"/>
+<h4 align="center">Figure 1. The Python package universe, compared to those taught in Galvanize.</h4>
 
 ## Table of Contents
 1. [Motivation](#1-motivation)
@@ -36,15 +36,15 @@ The data I used came from two tables that totaled 2TB in size on BigQuery. The `
 
 <p align="center">
 <img src="img/percent_repos.png" width="350" align="middle"/>
-<h4 align="center">Figure 1. Languages used in GitHub repos.</h4>
-[image source](https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI)
+<h4 align="center">Figure 2. Languages used in GitHub repos.</h4>
+[<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]
 </p>
 
 When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs and each of their package imports nested.
 
 <p align="center">
 <img src="img/regex.png" width="500" align="middle"/>
-<h4 align="center">Figure 2. Package name extraction from code.</h4>
+<h4 align="center">Figure 3. Package name extraction from code.</h4>
 </p>
 
 ###2.1 Time Series Data
@@ -56,13 +56,13 @@ To get the edge (package connections) pairs, I need to count each combination of
 
 <p align="center">
 <img src="img/mapreduce.png" width="800" align="middle"/>
-<h4 align="center"> Figure 3. MapReduce to parallelize computation for edge counts.</h4>
+<h4 align="center"> Figure 4. MapReduce to parallelize computation for edge counts.</h4>
 </p>
 
 ## 3 Interactive Visualization of Usage Trends
 <p align="center">
 <img src="img/mpld3.gif" width="800" align="middle"/>
-<h4 align="center"> Figure 4. Interactive plot created using mpld3.</h4>
+<h4 align="center"> Figure 5. Interactive plot created using mpld3.</h4>
 </p>
 
 For the time series portion of the web app, users can input a list of packages and the app will return an interactive plot created using mpld3. __Similar to Google Trends, the highest value on the plot is set to 100__ and the other values are scaled proportionally for comparison on a relative basis.
@@ -73,7 +73,7 @@ The network of packages had 60,000 nodes and 850,000 edges after I removed pairs
 
 <p align="center">
 <img src="img/compare_graphs.png" width="800" align="middle"/>
-<h4 align="center">Figure 5. Influence of edge weights and centrality metric on network visualization.</h4>
+<h4 align="center">Figure 6. Influence of edge weights and centrality metric on network visualization.</h4>
 </p>
 
 ###4.1 Edge Weights
@@ -87,13 +87,13 @@ To visualize the graph, I used a __force-directed layout__ in Gephi called Force
 
 <p align="center">
 <img src="img/graph_layouts.png" width="500" align="middle"/>
-<h4 align="center">Figure 6. Network layouts and topology in Gephi.</h4>
+<h4 align="center">Figure 7. Network layouts and topology in Gephi.</h4>
 </p>
 
 ###4.2 Node Importance
 <p align="center">
 <img src="img/centralities.png" width="800" align="middle"/>
-<h4 align="center">Figure 6. Comparison of different centrality metrics on the same graph.</h4>
+<h4 align="center">Figure 8. Comparison of different centrality metrics on the same graph.</h4>
 </p>
 
 A few different metrics can be used to determine node importance: degree centrality, betweenness centrality, and eigenvector centrality. They are proportional to the following (prior to normalization):
