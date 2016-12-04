@@ -1,15 +1,15 @@
 <img src="img/cover.png" align="middle"/>
 
-<p align="center"><i>Galvanize capstone project built in <b>2 weeks</b></p>
+<p align="center"><i>Galvanize capstone project built in <b>2 weeks</b></i></p>
 
-<img src="img/graph.png" align="middle"/>
+<img src="img/graph.gif" align="middle"/>
 
 ## Table of Contents
 1. [Motivation](#1-motivation)
 2. [The Database](#2-the-database)
     * [2.1 Time Series Data](#21-time-series-data)
     * [2.1 Network Data](#22-network-data)
-3. [Usage Trends Interactive Visualization](#3-usage-trends-interactive-visualization)
+3. [Interactive Visualization of Usage Trends](#3-interactive-visualization-of-usage-trends)
 4. [Network Analysis and Recommender](#4-network-analysis-and-recommender)
 	* [4.1 Edge Weights](#41-edge-weights)
 	* [4.2 Node Importance](#42-node-importance)
@@ -17,7 +17,7 @@
 	* [4.4 Communities](#44-communities)
 5. [Text Analysis and Prediction](#5-text-analysis-and-prediction) 
 6. [The Web App](#6-the-web-app)
-7. [About Me](#7-about-me)
+7. [About the Author](#7-about-the-author)
 8. [References](#8-references)
 
 ## 1 Motivation
@@ -25,11 +25,11 @@ Open source software has accelerated innovation and enabled collaboration for pe
 
 __GitHub__ [recently](https://github.com/blog/2201-making-open-source-data-more-available) made activity data for over 3 million open source repositories available on Google BigQuery, making it one of the largest datasets on collaboration. 
 
-> __“Just as books capture thoughts and ideas, software encodes human knowledge in a machine-readable form. This dataset is a great start toward the pursuit of documenting the open source community's vast repository of knowledge.”__ -- GitHub blog
+> “Just as books capture thoughts and ideas, software encodes human knowledge in a machine-readable form. This dataset is a great start toward the pursuit of documenting the open source community's vast repository of knowledge.” -- GitHub blog
 
-__GitHub Trends__ was created by mining this data for insights to help users explore open source package adoption and relationships within a network. Use cases include:
+__GitHub Trends__ was created by mining open source code for insights on open source package adoption and relationships within a network. Use cases include:
 + Helping users compare packages and see which ones are gaining more momentum
-+ Recommending new packages that are relevant to a package users may already be using
++ Recommending new packages that are relevant to packages users may already be using
 
 ## 2 The Database
 The data I used came from two tables that totaled 2TB in size on BigQuery. The `contents` table included code at the file level, and the `commits` table included timestamps at the commit level. For the scope of this 2-week project, I limited my data to the Python language which is 7% of repos, and used an extract available for [Python contents](https://bigquery.cloud.google.com/table/fh-bigquery:github_extracts.contents_py) that made the joins less massive.
@@ -59,7 +59,7 @@ To get the edge (package connections) pairs, I need to count each combination of
 <h4 align="center"> Figure 3. MapReduce to parallelize computation for edge counts.</h4>
 </p>
 
-## 3 Time Series Interactive Visualization
+## 3 Interactive Visualization of Usage Trends
 <p align="center">
 <img src="img/mpld3.gif" width="800" align="middle"/>
 <h4 align="center"> Figure 4. Interactive plot created using mpld3.</h4>
@@ -92,7 +92,7 @@ To visualize the graph, I used a __force-directed layout__ in Gephi called Force
 
 ###4.2 Node Importance
 <p align="center">
-<img src="img/centralities.png" width="500" align="middle"/>
+<img src="img/centralities.png" width="800" align="middle"/>
 <h4 align="center">Figure 6. Comparison of different centrality metrics on the same graph.</h4>
 </p>
 
@@ -107,7 +107,7 @@ Degree centrality made most packages disappear with the exception of the big one
 To make similarity recommendations for a given package of interest, I want to identify neighboring packages that are _structurally_ similar in the network. I used the __Jaccard similarity__ statistic to rank a list of the node's first degree neighbors as recommendations for most _similar_ packages, which is calculated by the number of common neighbors divided by the union of the neighbors of both packages.
 
 <p align="center">
-<img src="img/similarities.png" width="250" align="middle"/>
+<img src="img/similarities.png" width="500" align="middle"/>
 </p>
 
 There are a few other statistics for calculating common neighbor similarity. Cosine similarity is similar to Jaccard, but normalizes with the geometric mean of the two packages' neighbors as opposed to the union.
@@ -131,7 +131,7 @@ The web app consists of two components:
 
 Currently working to add package descriptions and topics. __Live app coming soon - stay tuned!__
 
-## 7 About Me
+## 7 About the Author
 
 **Carmen Lai** is a data scientist in San Francisco with a background in neuroscience and industry experience in marketing analytics and strategy consulting. She is interested in using statistical modeling and machine learning techniques to drive product growth and greater understanding of users. You can reach her on [LinkedIn](https://www.linkedin.com/in/carmenlai).
 
