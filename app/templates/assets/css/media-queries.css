@@ -1,0 +1,57 @@
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+    .timer .days, .timer .hours, .timer .minutes, .timer .seconds { font-size: 60px; line-height: 70px; }
+	
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	.inner-bg { padding: 100px 0 160px 0; }
+	
+    .timer .days, .timer .hours, .timer .minutes, .timer .seconds { font-size: 46px; line-height: 60px; }
+
+}
+
+@media (max-width: 767px) {
+	
+	body { text-align: center; }
+	
+	.navbar { padding-top: 0; }
+	.navbar.navbar-no-bg { background: #333; background: rgba(51, 51, 51, 0.9); }
+	.navbar>.container .navbar-brand { height: 80px; margin-left: 15px; }
+	.navbar-collapse { border: 0; }
+	.navbar-toggle { margin-top: 22px; }
+	.navbar-inverse ul.navbar-nav li .li-social a { display: inline-block; padding-top: 5px; }
+	
+	.inner-bg { padding: 100px 0 70px 0; }
+	.top-content .text { padding-top: 0; padding-bottom: 60px; }
+	.subscribe input.subscribe-email, .subscribe button { width: 100%; }
+	
+    .timer .days, .timer .hours, .timer .minutes, .timer .seconds { font-size: 46px; line-height: 60px; }
+
+}
+
+@media (max-width: 415px) {
+	
+	h1, h2 { font-size: 32px; }
+
+}
+
+
+/* Retina-ize images/icons */
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+	
+	/* logo */
+    .navbar-brand {
+    	background-image: url(../img/logo@2x.png) !important; background-repeat: no-repeat !important; background-size: 104px 50px !important;
+    }
+	
+}
