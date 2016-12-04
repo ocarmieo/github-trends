@@ -96,7 +96,7 @@ To visualize the graph, I used a __force-directed layout__ in Gephi called Force
 ###4.2 Node Importance
 <p align="center">
 <img src="img/centralities.png" width="800" align="middle"/>
-<h4 align="center">Figure 8. Comparison of different centrality metrics on the same graph.</h4>
+<h4 align="center">Figure 8. Comparison of different centrality metrics on the same graph. [<a href="http://www.slideshare.net/gcheliotis/social-network-analysis-3273045">image source</a>]</h4>
 </p>
 
 A few different metrics can be used to determine node importance: degree centrality, betweenness centrality, and eigenvector centrality. They are proportional to the following (prior to normalization):
