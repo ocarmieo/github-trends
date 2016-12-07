@@ -91,3 +91,14 @@ FROM
 GROUP BY
   packages,
   min_author_date;
+
+
+SELECT
+  sample_repo_name AS repo_name,
+  sample_path AS file_path,
+  UNIQUE(COALESCE(REGEXP_EXTRACT(content, r'"""(.*)"""'), '0')) AS docstrings
+FROM
+  [singular-range-148905:github_trends.python_init_files]
+GROUP BY
+  repo_name,
+  file_path;

@@ -1,4 +1,4 @@
-<p align="center"><i>Galvanize data science capstone project built in <b>2 weeks</b></i></p>
+<p align="center"><i>Data science capstone project mining open source code for insights, built in <b>2 weeks</b></i></p>
 <img src="img/cover.png" align="middle"/>
 
 <img src="img/graph.gif" align="middle"/>
@@ -72,7 +72,7 @@ This plot was made using [`mpld3`](https://mpld3.github.io/), a Python toolkit t
 
 The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__.
 
-The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. There are a few metrics that help to achieve this from a visualization standpoint.
+The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. Metrics like __pointwise mutual information__, __eigenvector centrality__, and __Jaccard similarity__ were chosen to highlight strong relationships even for less popular packages.
 
 <p align="center">
 <img src="img/compare_graphs.png" width="900" align="middle"/>
@@ -107,16 +107,30 @@ A few different metrics can be used to determine node importance: degree central
 Degree centrality made most packages disappear with the exception of the big ones that are more generally used (`os`, `sys`). Betweenness centrality had a similar result, likely influenced by the edge weights. __Eigenvector centrality__ looked the best visually and made the most sense in terms of the objectives of this project: __to recommend packages that may not be the most widely used, but are the most relevant__. The assumption is that a node's importance depends more on the quality of its connections rather than the quantity. Google's PageRank algorithm used to order search engine results is a variant of eigenvector centrality.
 
 ###4.3 Node Similarity
-To make similarity recommendations for a given package of interest, I want to identify neighboring packages that are _structurally_ similar in the network. I used the __Jaccard similarity__ statistic to rank a list of the node's first degree neighbors as recommendations for most _similar_ packages, which is calculated by the number of common neighbors divided by the union of the neighbors of both packages.
+To make similarity recommendations for a given package of interest, I want to identify neighboring packages that are _structurally_ similar in the network. I used __Jaccard similarity__ to rank a list of a node's first degree neighbors as recommendations for most _similar_ packages, which is calculated by the number of common neighbors divided by the union of the neighbors of both packages. This metric determines node similarity __in context of the network structure, rather than just individual node attributes.__
+
+Jaccard similarity is used for ranked recommendations alongside pointwise mutual information ("weighted co-occurence"), and a raw edge count. I found that the raw count typically returns recommendations that are more generally popular, while the left two metrics return more highly relevant or specific packages. In the example below for `networkx` (a package for network analysis), top recommended packages include `Bio` (computational biology), `nltk` (natural language processing), and `pycxsimulator` (dynamic graph simulation), all of which point to more specific use cases for `networkx`.
 
 <p align="center">
-<img src="img/similarities.png" width="500" align="middle"/>
+<img src="img/networkx_ex.png" align="middle"/>
+<h4 align="center">Figure 9. Screenshot from the network-based recommender.</h4>
 </p>
-
-There are a few other statistics for calculating common neighbor similarity. Cosine similarity is similar to Jaccard, but normalizes with the geometric mean of the two packages' neighbors as opposed to the union.
 
 ###4.4 Communities
 __Modularity__ is a measure of how densely connected a community is based on the number of edges that are _within_ a community compared to the _expected_ number that would exist at random, holding the number of degrees constant. A community should have denser connections within itself and sparser connections to other communities. Gephi allows you to color nodes based on "Modularity Class." You can tweak the community detection algorithm resolution to show more of fewer communities.
+
+<h4 align="center">Table 1. Top five communities via modularity, with human-assigned labels.</h4>
+
+|__Importance Ranking (by eigencentrality)__|__Scripting / Testing__|__Web Apps__|__Math / Machine Learning__|__Utilities__|__Cloud Computing__
+|-|--|--------|--------------|-----------|----|
+|1|os|DateTime|\_\_future\_\_|collections|uuid|
+|2|sys|json|numpy|random|six|
+|3|time|django|math|subprocess|mock|
+|4|logging|flask|matplotlib|traceback|sqlalchemy|
+|5|re|util|scipy|urllib|eventlet|
+|6|unittest|nose|pandas|ConfigParser|abc|
+|7|pytest|pytz|sklearn|threading|nova|
+|8|PyQt4|xmodule|pylab|tempfile|oslo_config|
 
 ## 5 Text Mining and Prediction
 Analysis of package description text coming soon!
@@ -128,6 +142,7 @@ The web app consists of two components:
 <img src="img/time.gif" width="800" align="middle"/>
 </p>
 + __Network-based recommender of similar or relevant packages__ - allows users to traverse through the network based on similarity or relevance
+    * Ranked recommendations from Jaccard similarity and normalized pointwise mutual information tend to return packages that may be less widely used but are more highly relevant, while those from a raw count are more generally popular packages
 <p align="center">
 <img src="img/rec.gif" width="800" align="middle"/>
 </p>
