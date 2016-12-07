@@ -113,15 +113,13 @@ Jaccard similarity is used for ranked recommendations alongside pointwise mutual
 
 <p align="center">
 <img src="img/networkx_ex.png" align="middle"/>
-<h4 align="center">Figure 9. Screenshot from the network-based recommender.</h4>
+<h4 align="center">Figure 9. Screenshot from the network-based recommender app. [<a href="#6-the-web-app">see demo</a>]</h4>
 </p>
 
 ###4.4 Communities
 __Modularity__ is a measure of how densely connected a community is based on the number of edges that are _within_ a community compared to the _expected_ number that would exist at random, holding the number of degrees constant. A community should have denser connections within itself and sparser connections to other communities. Gephi allows you to color nodes based on "Modularity Class." You can tweak the community detection algorithm resolution to show more of fewer communities.
 
-<h4 align="center">Table 1. Top five communities via modularity, with human-assigned labels.</h4>
-
-|__Importance Ranking (by eigencentrality)__|__Scripting / Testing__|__Web Apps__|__Math / Machine Learning__|__Utilities__|__Cloud Computing__
+|__Importance Ranking (by eigencentrality)__|__Scripting / Testing__|__Web Apps__|__Math / Machine Learning__|__Utilities__|__Cloud Computing__|
 |-|--|--------|--------------|-----------|----|
 |1|os|DateTime|\_\_future\_\_|collections|uuid|
 |2|sys|json|numpy|random|six|
@@ -131,6 +129,8 @@ __Modularity__ is a measure of how densely connected a community is based on the
 |6|unittest|nose|pandas|ConfigParser|abc|
 |7|pytest|pytz|sklearn|threading|nova|
 |8|PyQt4|xmodule|pylab|tempfile|oslo_config|
+
+<h4 align="center">Table 1. Top five communities via modularity, with human-assigned labels.</h4>
 
 ## 5 Text Mining and Prediction
 Analysis of package description text coming soon!
