@@ -134,7 +134,12 @@ Importance Ranking by Eigencentrality | Scripting / Testing | Web Apps | Math / 
 <h4 align="center">Table 1. Top five communities via modularity, with human-assigned labels.</h4>
 
 ## 5 Text Mining and Prediction
-Analysis of package description text coming soon!
+Analysis of package description text coming soon. Workstreams I have tried:
++ Scrape [pypi.python.org/simple](https://pypi.python.org/simple/) for package descriptions and summaries
++ Write a script to pip install all packages in a virtual environment, importing each package, and getting its docstring through the \_\_doc\_\_ method
++ Extract all \_\_init\_\_.py file docstrings from the BigQuery GitHub repos dataset
+
+The remaining challenge is mapping the __package import name__ (used in this project) and the __pip install name__. For example, in order to import `sklearn`, you need to install `scikit-learn`. Please reach out if you have a suggested solution!
 
 ## 6 The Web App
 The web app consists of two components:
