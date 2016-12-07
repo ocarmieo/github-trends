@@ -5,6 +5,7 @@
 <h4 align="center">Figure 1. The Python package universe, compared to those taught at Galvanize.</h4>
 
 ## Table of Contents
+
 1. [Motivation](#1-motivation)
 2. [The Database](#2-the-database)
     * [2.1 Time Series Data](#21-time-series-data)
@@ -119,16 +120,16 @@ Jaccard similarity is used for ranked recommendations alongside pointwise mutual
 ###4.4 Communities
 __Modularity__ is a measure of how densely connected a community is based on the number of edges that are _within_ a community compared to the _expected_ number that would exist at random, holding the number of degrees constant. A community should have denser connections within itself and sparser connections to other communities. Gephi allows you to color nodes based on "Modularity Class." You can tweak the community detection algorithm resolution to show more of fewer communities.
 
-|__Importance Ranking (by eigencentrality)__|__Scripting / Testing__|__Web Apps__|__Math / Machine Learning__|__Utilities__|__Cloud Computing__|
-|-|--|--------|--------------|-----------|----|
-|1|os|DateTime|\_\_future\_\_|collections|uuid|
-|2|sys|json|numpy|random|six|
-|3|time|django|math|subprocess|mock|
-|4|logging|flask|matplotlib|traceback|sqlalchemy|
-|5|re|util|scipy|urllib|eventlet|
-|6|unittest|nose|pandas|ConfigParser|abc|
-|7|pytest|pytz|sklearn|threading|nova|
-|8|PyQt4|xmodule|pylab|tempfile|oslo_config|
+Importance Ranking<br>by Eigencentrality | Scripting / Testing | Web Apps | Math / Machine Learning | Utilities | Cloud Computin
+:-: | :--: | :--------: | :--------------: | :-----------: | :----:
+1 | os | DateTime | \_\_future\_\_ | collections | uuid
+2 | sys | json | numpy | random | six
+3 | time | django | math | subprocess | mock
+4 | logging | flask | matplotlib | traceback | sqlalchemy
+5 | re | util | scipy | urllib | eventlet
+6 | unittest | nose | pandas | ConfigParser | abc
+7 | pytest | pytz | sklearn | threading | nova
+8 | PyQt4 | xmodule | pylab | tempfile | oslo_config
 
 <h4 align="center">Table 1. Top five communities via modularity, with human-assigned labels.</h4>
 
