@@ -142,8 +142,8 @@ The web app consists of two components:
 <p align="center">
 <img src="img/time.gif" width="800" align="middle"/>
 </p>
-+ __Network-based recommender of similar or relevant packages__ - allows users to traverse through the network based on similarity or relevance
-    * Ranked recommendations from Jaccard similarity and normalized pointwise mutual information tend to return packages that may be less widely used but are more highly relevant, while those from a raw count are more generally popular packages
++ __Network-based recommender of similar or relevant packages__ - allows users to traverse through the network based on similarity or complementary
+    * Ranked recommendations from __Jaccard similarity__ and __normalized pointwise mutual information__ tend to return packages that may be less widely used but are more highly relevant, while those from a raw count are more generally popular packages
 <p align="center">
 <img src="img/rec.gif" width="800" align="middle"/>
 </p>
