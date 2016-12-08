@@ -34,7 +34,7 @@ __GitHub Trends__ was created by mining open source code for insights on open so
 
 ## 2 The Database
 <p align="center">
-<img src="img/dataprocess.png.png" align="middle"/>
+<img src="img/dataprocess.png" align="middle"/>
 <h4 align="center">Figure 2. Data workflow from raw code to web app.</h4>
 </p>
 
