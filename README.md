@@ -33,18 +33,23 @@ __GitHub Trends__ was created by mining open source code for insights on open so
 + Recommending new packages that are relevant to packages users may already be using
 
 ## 2 The Database
+<p align="center">
+<img src="img/dataprocess.png.png" align="middle"/>
+<h4 align="center">Figure 2. Data workflow from raw code to web app.</h4>
+</p>
+
 The data I used came from two tables that totaled 2TB in size on BigQuery. The `contents` table included code at the file level, and the `commits` table included timestamps at the commit level. For the scope of this 2-week project, I limited my data to the __Python language__ which is 7% of repos, and used an extract available for [Python contents](https://bigquery.cloud.google.com/table/fh-bigquery:github_extracts.contents_py) that made the joins less massive.
 
 <p align="center">
 <img src="img/percent_repos.png" width="350" align="middle"/>
-<h4 align="center">Figure 2. Languages used in GitHub repos. [<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</h4>
+<h4 align="center">Figure 3. Languages used in GitHub repos. [<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</h4>
 </p>
 
 When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested.
 
 <p align="center">
 <img src="img/regex.png" width="500" align="middle"/>
-<h4 align="center">Figure 3. Package name extraction from Python code.</h4>
+<h4 align="center">Figure 4. Package name extraction from Python code.</h4>
 </p>
 
 ###2.1 Time Series Data
@@ -56,13 +61,13 @@ To get the edge (package connections) pairs, I need to count each combination of
 
 <p align="center">
 <img src="img/mapreduce.png" width="900" align="middle"/>
-<h4 align="center"> Figure 4. MapReduce to parallelize computation for edge counts.</h4>
+<h4 align="center"> Figure 5. MapReduce to parallelize computation for edge counts.</h4>
 </p>
 
 ## 3 Interactive Visualization of Usage Trends
 <p align="center">
 <img src="img/mpld3.gif" width="800" align="middle"/>
-<h4 align="center"> Figure 5. Interactive plot created using mpld3.</h4>
+<h4 align="center"> Figure 6. Interactive plot created using mpld3.</h4>
 </p>
 
 For the time series portion of the web app, users can input a list of packages and the app will return an interactive plot created using mpld3. __Similar to Google Trends, the highest value on the plot is set to 100__ and the other values are scaled proportionally for comparison on a relative basis.
@@ -77,7 +82,7 @@ The goal of the project is __to expose packages that may not be the most widely 
 
 <p align="center">
 <img src="img/compare_graphs.png" width="900" align="middle"/>
-<h4 align="center">Figure 6. Influence of edge weights and centrality metric on network visualization.</h4>
+<h4 align="center">Figure 7. Influence of edge weights and centrality metric on network visualization.</h4>
 </p>
 
 ###4.1 Edge Weights
@@ -91,13 +96,13 @@ To visualize the network, I used a __force-directed layout__ in Gephi called For
 
 <p align="center">
 <img src="img/graph_layouts.png" width="500" align="middle"/>
-<h4 align="center">Figure 7. Network layouts and topology in Gephi.</h4>
+<h4 align="center">Figure 8. Network layouts and topology in Gephi.</h4>
 </p>
 
 ###4.2 Node Importance
 <p align="center">
 <img src="img/centralities.png" width="800" align="middle"/>
-<h4 align="center">Figure 8. Comparison of different centrality metrics on the same graph. [<a href="http://www.slideshare.net/gcheliotis/social-network-analysis-3273045">image source</a>]</h4>
+<h4 align="center">Figure 9. Comparison of different centrality metrics on the same graph. [<a href="http://www.slideshare.net/gcheliotis/social-network-analysis-3273045">image source</a>]</h4>
 </p>
 
 A few different metrics can be used to determine node importance: degree centrality, betweenness centrality, and eigenvector centrality. They are proportional to the following (prior to normalization):
@@ -114,7 +119,7 @@ Jaccard similarity is used for ranked recommendations alongside pointwise mutual
 
 <p align="center">
 <img src="img/networkx_ex.png" align="middle"/>
-<h4 align="center">Figure 9. Screenshot from the network-based recommender app. [<a href="#6-the-web-app">see demo</a>]</h4>
+<h4 align="center">Figure 10. Screenshot from the network-based recommender app. [<a href="#6-the-web-app">see demo</a>]</h4>
 </p>
 
 ###4.4 Communities
