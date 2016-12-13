@@ -45,7 +45,7 @@ The data I used came from two tables that totaled 2TB in size on BigQuery. The `
 <h4 align="center">Figure 3. Languages used in GitHub repos. [<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</h4>
 </p>
 
-When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested.
+When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested. You can see the SQL queries here: [bigquery.sql](https://github.com/ocarmieo/github-trends/blob/master/src/bigquery.sql).
 
 <p align="center">
 <img src="img/regex.png" width="500" align="middle"/>
@@ -57,7 +57,7 @@ The tricky part in handling dates was that there were both author dates and comm
 To prepare the data for easy querying on the web app, I stored the count of package imports in a PostgreSQL database, and __set package name and date as indices__ of the table.
 
 ###2.2 Network Data
-To get the edge (package connections) pairs, I need to count each combination of packages for each file. Doing this in SQL would involve self joins and a lot of computation, so I decided to export the data and use MapReduce to parallelize the process. This could be done for __4 million files in a couple of minutes__ using Amazon EMR (Elastic MapReduce) to split the work across multiple machines.
+To get the edge (package connections) pairs, I need to count each combination of packages for each file. Doing this in SQL would involve self joins and a lot of computation, so I decided to export the data and use MapReduce to parallelize the process. This could be done for __4 million files in a couple of minutes__ using Amazon EMR (Elastic MapReduce) to split the work across multiple machines. You can see the MapReduce code here: [mr_edges.py](https://github.com/ocarmieo/github-trends/blob/master/src/mr_edges.py) and [mr_nodes.py](https://github.com/ocarmieo/github-trends/blob/master/src/mr_nodes.py).
 
 <p align="center">
 <img src="img/mapreduce.png" width="900" align="middle"/>
@@ -76,7 +76,7 @@ This plot was made using [`mpld3`](https://mpld3.github.io/), a Python toolkit t
 
 ## 4 Network Analysis and Recommender
 
-The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__.
+The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__. You can see the network analysis code here: [network_recommender.py](https://github.com/ocarmieo/github-trends/blob/master/src/network_recommender.py).
 
 The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. Metrics like __pointwise mutual information__, __eigenvector centrality__, and __Jaccard similarity__ were chosen to highlight strong relationships even for less popular packages.
 
@@ -147,7 +147,7 @@ Analysis of package description text coming soon. Workstreams I have tried:
 The remaining challenge is mapping the __package import name__ (used in this project) and the __pip install name__. For example, in order to import `sklearn`, you need to install `scikit-learn`. Please reach out if you have a suggested solution!
 
 ## 6 The Web App
-The web app consists of two components:
+The web app was built using Flask [app.py](https://github.com/ocarmieo/github-trends/blob/master/app/app.py) and consists of two components:
 + __Interactive visualization of package usage trends__
 <p align="center">
 <img src="img/time.gif" width="800" align="middle"/>
