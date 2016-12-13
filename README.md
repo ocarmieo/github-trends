@@ -94,15 +94,10 @@ Edge weights represent the strength of a relationship between two packages. Howe
 
 To visualize the network, I used a __force-directed layout__ in Gephi called ForceAtlas 2, which took into account the edge weights in the calculation of attraction and repulsion forces. Packages with a strong relationship attract, while packages with weak or no relationship repel. Gephi has [different layouts](https://gephi.org/tutorials/gephi-tutorial-layouts.pdf) depending on what features you want to highlight.
 
-<p align="center">
-<img src="img/graph_layouts.png" width="500" align="middle"/>
-<h4 align="center">Figure 8. Network layouts and topology in Gephi.</h4>
-</p>
-
 ###4.2 Node Importance
 <p align="center">
 <img src="img/centralities.png" width="800" align="middle"/>
-<h4 align="center">Figure 9. Comparison of different centrality metrics on the same graph. [<a href="http://www.slideshare.net/gcheliotis/social-network-analysis-3273045">image source</a>]</h4>
+<h4 align="center">Figure 8. Comparison of different centrality metrics on the same graph. [<a href="http://www.slideshare.net/gcheliotis/social-network-analysis-3273045">image source</a>]</h4>
 </p>
 
 A few different metrics can be used to determine node importance: degree centrality, betweenness centrality, and eigenvector centrality. They are proportional to the following (prior to normalization):
@@ -119,7 +114,7 @@ Jaccard similarity is used for ranked recommendations alongside pointwise mutual
 
 <p align="center">
 <img src="img/networkx_ex.png" align="middle"/>
-<h4 align="center">Figure 10. Screenshot from the network-based recommender app. [<a href="#6-the-web-app">see demo</a>]</h4>
+<h4 align="center">Figure 9. Screenshot from the network-based recommender app. [<a href="#6-the-web-app">see demo</a>]</h4>
 </p>
 
 ###4.4 Communities
