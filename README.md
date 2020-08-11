@@ -27,7 +27,7 @@
 ## 1 Motivation
 Open source software has accelerated innovation and enabled collaboration for people and organizations all over the world. However, __discoverability__ of new technologies has not caught up with its fast-growing availability. As a result, finding new packages is a challenge for learners who may be new to a topic or to coding entirely. Package managers like pip and Anaconda provide a rich index of packages, but are not as helpful in exposing users to new packages.
 
-__GitHub__ [recently](https://github.com/blog/2201-making-open-source-data-more-available) made activity data for over 3 million open source repositories available on Google BigQuery, making it one of the largest datasets on collaboration. 
+__GitHub__ [recently](https://github.com/blog/2201-making-open-source-data-more-available) made activity data for over 3 million open source repositories available on Google BigQuery, making it one of the largest datasets on collaboration.
 
 > “Just as books capture thoughts and ideas, software encodes human knowledge in a machine-readable form. This dataset is a great start toward the pursuit of documenting the open source community's vast repository of knowledge.” -- GitHub blog
 
@@ -48,7 +48,7 @@ The data I used came from two tables that totaled 2TB in size on BigQuery. The `
 <h4 align="center">Figure 3. Languages used in GitHub repos. [<a href="https://datastudio.google.com/#/org//reporting/0ByGAKP3QmCjLdXBlWVdrZU5yZW8/page/yFI">image source</a>]</h4>
 </p>
 
-When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested. You can see the SQL queries here: [bigquery.sql](/src/github_trends/bigquery.sql).
+When querying the data, I wanted to take advantage of Google's compute engine and do as much data processing that made sense using SQL on BigQuery prior to exporting the data. This included extracting package imports using regular expressions. My final table had file IDs along with each file's package imports nested. You can see the SQL queries here: [bigquery.sql](/src/bigquery.sql).
 
 <p align="center">
 <img src="/img/regex.png" width="500" align="middle"/>
@@ -60,7 +60,7 @@ The tricky part in handling dates was that there were both author dates and comm
 To prepare the data for easy querying on the web app, I stored the count of package imports in a PostgreSQL database, and __set package name and date as indices__ of the table.
 
 ### 2.2 Network Data
-To get the edge (package connections) pairs, I need to count each combination of packages for each file. Doing this in SQL would involve self joins and a lot of computation, so I decided to export the data and use MapReduce to parallelize the process. This could be done for __4 million files in a couple of minutes__ using Amazon EMR (Elastic MapReduce) to split the work across multiple machines. You can see the MapReduce code here: [mr_edges.py](/src/github_trends/mr_edges.py) and [mr_nodes.py](/src/github_trends/mr_nodes.py).
+To get the edge (package connections) pairs, I need to count each combination of packages for each file. Doing this in SQL would involve self joins and a lot of computation, so I decided to export the data and use MapReduce to parallelize the process. This could be done for __4 million files in a couple of minutes__ using Amazon EMR (Elastic MapReduce) to split the work across multiple machines. You can see the MapReduce code here: [mr_edges.py](/src/mr_edges.py) and [mr_nodes.py](/src/mr_nodes.py).
 
 <p align="center">
 <img src="/img/mapreduce.png" width="900" align="middle"/>
@@ -79,7 +79,7 @@ This plot was made using [`mpld3`](https://mpld3.github.io/), a Python toolkit t
 
 ## 4 Network Analysis and Recommender
 
-The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__. You can see the network analysis code here: [network_recommender.py](/src/github_trends/network_recommender.py).
+The network of packages had 60,000 nodes and 850,000 edges after I removed pairs that occured less than 5 times. I used [`networkx`](https://networkx.github.io/documentation/networkx-1.10/tutorial/index.html) in Python to organize the network data, node attributes, and edge attributes into a .gml file that can be read into [Gephi](https://gephi.org/) for __visualization__. I used [`igraph`](http://igraph.org/python/doc/igraph.Graph-class.html) in Python to power the __recommender__. You can see the network analysis code here: [network_recommender.py](/src/network_recommender.py).
 
 The goal of the project is __to expose packages that may not be the most widely used, but are the most relevant and have the strongest relationships__. Metrics like __pointwise mutual information__, __eigenvector centrality__, and __Jaccard similarity__ were chosen to highlight strong relationships even for less popular packages.
 
